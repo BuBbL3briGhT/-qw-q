@@ -1,0 +1,40 @@
+- Learn about Vim Buffers
+- Learn more Vim RTD
+- Put dots on Grithub
+- Edit and reload .vimrc quick and easy.
+- Markdown todo entries for vi.  [x]  test
+- Vim function should move completed tasks
+  to done.
+- Markdown plugin for vim.
+
+## Complete ##
+- Fix scrub to edit.
+- 🌞 Associate bubblescript .bubls files
+  with lisp in vim.
+- Associate todo files with markdown.
+
+## 2025-01-12 ##
+- Ascii art tool
+- test basked todo interface tool like taskpaper
+
+
+## 2025-01-11 ##
+- change bash prompt
+- improve td function
+    function td() {
+      ${EDITOR:-nano} "${@:-.}/.todo"
+    }
+- Get dot files into git.
+- Push dot files to github
+- link bin/bubls into usr/bin
+## 2025-01-10 ##
+- copy and link dot files to git project and directory
+- setup ko.fi for bubblebright/bubblescript
+- auto commit todo to git when editing this file.
+- publish bubblescript to npm
+- Merge bubblescript github repos for bubblebright
+- execute a bubblescript fike from commandline
+  eg. $ bubls examples/hello-world.bubls
+- setup 2FA for npm
+- jekyll site for bubblescript
+- Change bash colors, make theme, catalog it
