@@ -96,3 +96,4 @@ alias 👽=alias
 👽 🌺=.rc
 👽 🦜=echo
 👽 🐈=cat
+👽 🎻=vi
