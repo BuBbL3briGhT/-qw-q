@@ -97,3 +97,4 @@ alias 👽=alias
 👽 🦜=echo
 👽 🐈=cat
 👽 🎻=vi
+👽 🪵='git log --oneline'
