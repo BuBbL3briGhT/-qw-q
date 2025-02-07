@@ -98,3 +98,4 @@ alias 👽=alias
 👽 🐈=cat
 👽 🎻=vi
 👽 🪵='git log --oneline'
+👽 🐒=mv
