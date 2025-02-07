@@ -94,3 +94,4 @@ alias 🌻=ls
 alias 💘=mv
 alias 👽=alias
 👽 🌺=.rc
+👽 🦜=echo
