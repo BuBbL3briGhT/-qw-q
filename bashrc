@@ -95,3 +95,4 @@ alias 💘=mv
 alias 👽=alias
 👽 🌺=.rc
 👽 🦜=echo
+👽 🐈=cat
