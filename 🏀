@@ -100,3 +100,4 @@ alias 👽=alias
 👽 🪵='git log --oneline'
 👽 🐒=mv
 👽 🦓='git status'
+👽 🩰='git push'
