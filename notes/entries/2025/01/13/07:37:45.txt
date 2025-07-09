@@ -1,0 +1,3 @@
+Nice answer on seeing up tabs in vim.
+https://stackoverflow.com/a/1878983/28684586
+

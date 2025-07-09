@@ -1,0 +1,34 @@
+In JavaScript, you can get the static methods of a class using Object.getOwnPropertyNames() and filtering for methods that are defined as static. Here's an example:
+class MyClass {
+  static staticMethod1() {
+    console.log("Static Method 1");
+  }
+
+  static staticMethod2() {
+    console.log("Static Method 2");
+  }
+
+  instanceMethod() {
+    console.log("Instance Method");
+  }
+}
+
+const staticMethods = Object.getOwnPropertyNames(MyClass)
+  .filter(prop => typeof MyClass[prop] === 'function' && prop !== 'constructor');
+
+console.log(staticMethods); // Output: ["staticMethod1", "staticMethod2"]
+
+Explanation:
+
+• Object.getOwnPropertyNames(MyClass): This returns an array of all property names (including static and instance methods) of the MyClass class.
+• .filter(prop => ...): This filters the array to only include properties that meet the following conditions:
+	• typeof MyClass[prop] === 'function': Checks if the property is a function.
+	• prop !== 'constructor': Excludes the constructor function from the results.
+
+
+
+This approach will give you the names of all static methods defined in the class.
+
+Generative AI is experimental.
+
+

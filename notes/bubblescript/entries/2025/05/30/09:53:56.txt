@@ -1,0 +1,5 @@
+ For the sake of the bubblescript roll, it
+ would be a nice to have to integrate
+ parinfer.
+
+https://nodejs.org/api/readline.html

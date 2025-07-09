@@ -1,0 +1,28 @@
+https://www.google.com/search
+?q=bash+alias+params
+
+To pass parameters to a bash alias, you can use the following techniques:
+1. Using positional parameters:
+alias ll='ls -l'
+
+In this example, when you run ll /path/to/directory, the /path/to/directory argument is passed to the ls -l command.
+2. Using a function instead of an alias:
+function my_alias() {
+    ls -l "$@"
+    }
+
+    This function allows you to pass any number of arguments to the alias. The "$@" expands to all the arguments passed to the function.
+    3. Using the eval command (with caution):
+    alias my_alias='eval ls -l'
+
+    This approach allows you to pass arguments directly to the alias, but it can be dangerous if not used carefully.
+    Important considerations:
+
+    • Quoting: If your alias contains spaces or special characters, you might need to use quotes around the command and its parameters.
+    • Function vs. alias: For more complex operations or when you need to manipulate arguments before passing them to the command, using a function is generally recommended.
+    • Permanent aliases: To make aliases permanent, add them to your .bashrc or .bash_profile file.
+
+
+    Generative AI is experimental.
+
+

@@ -1,0 +1,20 @@
+Renaming in a project:
+
+
+https://stackoverflow.com/a/1583282
+
+find /home/www \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/subdomainA\.example\.com/subdomainB.example.com/g'
+-print0 tells find to print each of the results separated by a null character, rather than a new line. In the unlikely event that your directory has files with newlines in the names, this still lets xargs work on the correct filenames.
+
+\( -type d -name .git -prune \) is an expression which completely skips over all directories named .git. You could easily expand it, if you use SVN or have other folders you want to preserve -- just match against more names. It's roughly equivalent to -not -path .git, but more efficient, because rather than checking every file in the directory, it skips it entirely. The -o after it is required because of how -prune actually works.
+
+For more information, see man find.
+
+------
+
+https://stackoverflow.com/a/22385837
+
+The simplest way for me is
+
+grep -rlZ oldtext . | xargs -0 sed -i 's/oldtext/newtext/g'
+Sha

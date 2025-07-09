@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    int pipefd[2];
+    pid_t pid;
+
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) { // Child process
+        close(pipefd[1]); // Close the write end of the pipe
+
+        // Redirect stdin to read from the pipe
+        if (dup2(pipefd[0], STDIN_FILENO) == -1) {
+            perror("dup2");
+            exit(EXIT_FAILURE);
+        }
+        close(pipefd[0]);
+
+        // Execute the shell command
+        execlp("grep", "grep", "hello", NULL);
+        perror("execlp");
+        exit(EXIT_FAILURE);
+    } else { // Parent process
+        close(pipefd[0]); // Close the read end of the pipe
+
+        char buffer[1024];
+        while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+            write(pipefd[1], buffer, strlen(buffer));
+        }
+        close(pipefd[1]);
+
+        wait(NULL); // Wait for the child process to finish
+    }
+
+    return 0;
+}
+
+Explanation:
+
+• Include headers: Include necessary headers for I/O, system calls, and process management.
+• Create pipe: Create a pipe using the pipe() function. This creates two file descriptors (pipefd[0] for reading, pipefd[1] for writing).
+• Fork child process: Fork a child process using the fork() function.
+• Child process:
+	• Close the write end of the pipe (pipefd[1]).
+	• Redirect standard input (STDIN_FILENO) to read from the read end of the pipe (pipefd[0]) using dup2().
+	• Execute the desired shell command using execlp(). In this example, it's grep "hello".
+
+
+• Parent process:
+	• Close the read end of the pipe (pipefd[0]).
+	• Read data from standard input and write it to the write end of the pipe (pipefd[1]).
+	• Close the write end of the pipe (pipefd[1]) to signal end of input.
+	• Wait for the child process to finish using wait().
+
+
+
+How to run:
+
+• Compile the code: gcc -o pipe_example pipe_example.c
+• Run the program: ./pipe_example
+• Type some text, and the grep command in the child process will filter the input for lines containing "hello".
+
+
+Generative AI is experimental.
+
+[-] https://stackoverflow.com/questions/76843776/issue-with-communicating-between-two-different-c-programs-using-pipes[-] https://stackoverflow.com/questions/76843776/issue-with-communicating-between-two-different-c-programs-using-pipes[-] https://stackoverflow.com/questions/76843776/issue-with-communicating-between-two-different-c-programs-using-pipes
+

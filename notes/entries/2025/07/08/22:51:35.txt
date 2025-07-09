@@ -1,0 +1,27 @@
+ been working on bubblescript
+
+ Need to switch back to having empty list
+ object stuff
+
+ starting with an empty list or empty
+ bubles is an object oriented aspect of
+ bublescript that enables nicer coding
+ constructs in other places.
+
+ namely w need it now for push where push
+ send push to the object.
+
+ This in the unity of form and function,
+ where the function is delegated to the
+ object, and the form of invoking with a
+ functional pattern in maintained because
+ its a wrapper function that is delegating
+ to the object  rather then relying on
+ having the correct raw push fun tion
+ which can be ripped off the object, its
+ like a smart push.
+
+
+This id likly yo be adelge, so might want to take another break before attempting.
+
+Working on this on the brocolli branch.

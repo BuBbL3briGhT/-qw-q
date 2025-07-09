@@ -1,0 +1,9 @@
+
+// let emptyList = Object.create(List.prototype);
+// emptyList.toString = function() {
+//     return "()";
+//   }
+
+// Object.defineProperty(emptyList, "isEmpty", {
+//   get () { return true; }
+// });

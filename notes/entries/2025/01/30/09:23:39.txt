@@ -1,0 +1,11 @@
+Been doing lotz of work on bubblescript...
+
+But what is bubblescript?
+
+Really, it is a project i have been using to become better aquainted with FP and its potential benifits, but really.
+
+it is really, from the beginning, meant to be an implementation of Clojure, but for javascript. Anyway, we keep the door open.
+
+Some other early project goals were optional outer parameters and also emoji symbol support.
+
+Anyway, who knows. it is something to keep busy with  and see where it leads.
