@@ -4,3 +4,5 @@ sicp, further reading and experimentation.
 read up on node mvc
 promises in bubble scribe
 node school
+
+Create LLM or SLM for bubblesscript, that can be used to author bubblescript code, translate into and out of the language, and perhaps even extend or build the language. Many possibilies. Also look into possibilities with NotebookLM.
