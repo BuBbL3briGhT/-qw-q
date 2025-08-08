@@ -1,0 +1,6 @@
+research and implement lazy petterns, streams, in bubblescript
+sicp, further reading and experimentation.
+
+read up on node mvc
+promises in bubble scribe
+node school
