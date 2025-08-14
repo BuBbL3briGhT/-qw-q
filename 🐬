@@ -34,7 +34,8 @@ endfun
 autocmd BufWritePre * call TrimWhitespace()
 
 " Bubblescript
-autocmd BufNewFile,BufRead *.bubls set ft=lisp
+" autocmd BufNewFile,BufRead *.bubls set ft=lisp
+" autocmd BufNewFile,BufRead *.🫧 set ft=lisp
 
 " .todo
 autocmd BufNewFile,BufRead .todo set ft=markdown
@@ -43,6 +44,10 @@ autocmd BufNewFile,BufRead .todo set ft=markdown
 " https://superuser.com/a/929004
 nnoremap <leader>ev :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Paste
+nnoremap <leader>sp :set paste<CR>
+nnoremap <leader>snp :set nopaste<CR>
 
 let mapleader = ","
 

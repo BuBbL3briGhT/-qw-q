@@ -39,6 +39,21 @@ function quickcommit() {
   fi
 }
 
+function 🐇🐢() {
+  git add .
+  git status
+  git diff --cached
+  message="$(git log --pretty=format:"%s" | head -n1 | sed 's/ //')"
+  echo "$message"
+  read -p "Looking peachy? (🍑/🍌): " -i "🍑" peachy
+  case $peachy in
+    [🍑]* )
+      git commit -m "$message";;
+    [🍌]* )
+      echo "🍌🐒";;
+  esac
+}
+
 function yo() {
   echo "hi"
 }
@@ -88,7 +103,6 @@ PS1="\[\e[0;95m\]\W\[\e[0m\] \[\e[1;35m\]🍀\[\e[0m\] "
 # LS_COLORS='di=0;97:fi=1:97:' ; export LS_COLORS
 LS_COLORS=':di=0;95:' ; export LS_COLORS
 
-/* cd ~/projects/bubblescript */
 # vi newjack.
 alias 🌻=ls
 alias 💘=mv
@@ -101,3 +115,4 @@ alias 👽=alias
 👽 🐒=mv
 👽 🦓='git status'
 👽 🩰='git push'
+👽 🐚=cd
