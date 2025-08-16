@@ -21,6 +21,7 @@ alias+="git add .; git status; git diff --cached"
 alias ++="quickcommit"
 alias scramble="fold -w1 | shuf | tr -d '\n'";
 alias 🐦="quickcommit"
+alias 🏁="git log --pretty=format:'%s'"
 
 
 function quickcommit() {
@@ -39,20 +40,58 @@ function quickcommit() {
   fi
 }
 
+# function 🐇🐢() {
+#   git add .
+#   git status
+#   git diff --cached
+#   message="$(git log --pretty=format:"%s" | head -n1 | sed 's/ //')"
+#   echo "$message"
+#   read -p "Looking peachy? (🍑/🍌): " -i "🍑" peachy
+#   case $peachy in
+#     [🍑]* )
+#       git commit -m "$message";;
+#     [🍌]* )
+#       echo "🍌🐒";;
+#   esac
+# }
+
 function 🐇🐢() {
   git add .
   git status
-  git diff --cached
-  message="$(git log --pretty=format:"%s" | head -n1 | sed 's/ //')"
+  # git diff --cached
+  #
+  if [ -z "$(git status | grep 'nothing to commit, working tree clean')" ]; then
+    echo "Working directory is not clean.";
+    return 1;
+  fi
+
+
+  # git log --pretty=format:"%h,%s" | grep "^.*,[^\.]" | head -n 1 | cut -d',' -f'1'
+  mergeHead="$(git log --pretty=format:'%h' | head -n1)"
+  raceHead="$(git log --pretty=format:'%h,%s' | grep '^.*,[^\.]' | head -n1)"
+  commit="$(echo "$raceHead" | cut -d',' -f'1')"
+  message="$(echo "$raceHead" | cut -d',' -f'2')"
+  message="$(echo "$message" | sed 's/ //')"
+  # message="$(git log --pretty=format:'%s' | head -n1 | sed 's/ //')"
+  # echo "$message : $c"
+  # echo "$message : $commit"
+  git diff --cached $commit
+  echo "$raceHead"
   echo "$message"
+  echo "$commit"
   read -p "Looking peachy? (🍑/🍌): " -i "🍑" peachy
   case $peachy in
     [🍑]* )
-      git commit -m "$message";;
+      # git commit -m "$message";;
+
+      git reset --hard "$commit";
+      git merge --no-ff "$mergeHead" -m "$message";;
     [🍌]* )
       echo "🍌🐒";;
   esac
 }
+
+alias 🐢🐇=🐇🐢;
 
 function yo() {
   echo "hi"
