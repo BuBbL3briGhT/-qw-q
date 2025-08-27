@@ -1,0 +1,37 @@
+
+
+One of the big lessons learned so far in trying
+to learn a more functional approach to
+programming is...
+
+
+I've been trying to tackle functional
+programming on qnd off now for what is probably
+close to 5 years more or less. It has been a
+learning adventure. It has been fun and exciting
+at times, and some times head scratching and
+bewildering. Actually, it hasnt really been all
+that bad, it's mostly a matter of patience in
+finding the right solutions. In a way, functional
+programming is kind of like magic, because once
+you have the function, whatever it does is available
+to you in a single poof.
+
+So, yherefore, being like magic, it is going to
+have its draw backs  not unlike most things if
+not everything. I think the sane way to think
+about FP, as i may have come to understand, is
+that it is best utilizedfor certian programming
+tasks  in the same way a chef might choose to
+use a mixer over a press. Where as, in this
+anology, the mixer is FP, and the press could be
+OO.
+
+My reasoning in stateing this, is that at first
+for many good reasons, i really kinda went full
+FP, trying to fit everything into an FP approach...
+
+
+
+
+
