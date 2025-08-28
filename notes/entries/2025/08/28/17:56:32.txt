@@ -1,0 +1,15 @@
+To pipe the output of the echo command through sed, the pipe symbol | is used to connect the standard output of echo to the standard input of sed.
+Example:
+To change "hello" to "hi" in a string echoed by echo:
+echo "hello there" | sed "s/hello/hi/"
+
+Explanation:
+
+• echo "hello there": This command prints the string "hello there" to standard output.
+• |: This is the pipe operator, which redirects the standard output of the command on its left (echo) to the standard input of the command on its right (sed).
+• sed "s/hello/hi/": This sed command receives the string "hello there" as input. The s command performs a substitution, replacing the first occurrence of "hello" with "hi". The modified output ("hi there") is then printed to standard output.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=pipe+echo+through+sed&oq=pipe+echo+through+sed
+

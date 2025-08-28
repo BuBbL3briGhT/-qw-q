@@ -1,0 +1,46 @@
+To pass values (arguments) to a function in Bash, you list them after the function name when calling it, similar to how you pass arguments to a command. Inside the function, these arguments are accessed using positional parameters like $1, $2, $3, and so on.
+Here's how to pass values to a Bash function: Define the function.
+    my_function() {
+        echo "First argument: $1"
+        echo "Second argument: $2"
+        echo "All arguments: $@"
+        echo "Number of arguments: $#"
+    }
+
+Call the function with arguments.
+    my_function "value1" "value2 with spaces"
+
+Explanation of special parameters within a function:
+
+• $1, $2, $3, ...: Represent the individual arguments passed to the function, corresponding to their position.
+• $@: Expands to all positional parameters passed to the function, each as a separate word. When double-quoted ("$@"), it expands to "$1" "$2" ... "$n", preserving any spaces within individual arguments.
+• $*: Expands to all positional parameters passed to the function as a single string. When double-quoted ("$*"), it expands to "$1c$2c...c$n", where c is the first character of the IFS (Internal Field Separator) variable, typically a space.
+• $#: Represents the number of positional parameters (arguments) passed to the function. [1]
+• $0: Inside a function, $0 still refers to the name of the script itself, not the function name.
+
+Example:
+#!/bin/bash
+
+greet_user() {
+    echo "Hello, $1!"
+    echo "Your age is $2."
+    echo "You passed $# arguments."
+}
+
+greet_user "Alice" 30
+echo "---"
+greet_user "Bob Smith" 25 "extra_arg"
+
+Output of the example:
+Hello, Alice!
+Your age is 30.
+You passed 2 arguments.
+---
+Hello, Bob Smith!
+Your age is 25.
+You passed 3 arguments.
+
+AI responses may include mistakes.
+
+[1] https://linuxize.com/post/bash-functions/
+https://www.google.com/search?q=pass+value+to+func%C3%ADon+in+bash

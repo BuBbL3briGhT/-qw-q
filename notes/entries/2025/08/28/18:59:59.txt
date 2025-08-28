@@ -1,0 +1,24 @@
+To convert a camel case string to snake case in Bash, the sed and tr commands can be used in combination.
+Here's an example:
+camelCaseString="thisIsACamelCaseString"
+snakeCaseString=$(echo "$camelCaseString" | sed -E 's/([A-Z])/_\L\1/g' | sed -E 's/^_//')
+echo "$snakeCaseString"
+
+Explanation:
+
+• echo "$camelCaseString": This pipes the input camel case string to sed.
+• sed -E 's/([A-Z])/_\L\1/g':
+  • s/.../.../g: This is the sed substitute command, replacing all occurrences (g).
+    • ([A-Z]): This captures any uppercase letter (A-Z) into a group.
+      • _\L\1: This replaces the captured uppercase letter with an underscore (_) followed by the lowercase version of the captured letter (\L\1).
+
+      • sed -E 's/^_//':
+        • This second sed command is used to remove any leading underscore that might be introduced if the original camel case string started with an uppercase letter.
+          • s/^_//: This replaces a leading underscore (^_) with nothing (//).
+
+          Example Output:
+          this_is_a_camel_case_string
+
+          AI responses may include mistakes.
+
+          https://www.google.com/search?q=cbash+covert+camelcase+to+snakecase

@@ -1,0 +1,40 @@
+In Bash, functions do not directly "return" variables in the way some other programming languages do. Instead, you can achieve this by capturing the function's standard output (stdout) or by modifying a global variable.
+1. Capturing Standard Output (Recommended Method):
+This method involves the function printing the desired value to stdout using echo or printf, and then capturing that output into a variable using command substitution ($()).
+#!/bin/bash
+
+# Define the function
+my_function() {
+  local result="This is the value from the function."
+    echo "$result" # Print the value to stdout
+    }
+
+    # Call the function and store its output in a variable
+    my_variable=$(my_function)
+
+    # Use the variable
+    echo "The variable contains: $my_variable"
+
+    2. Modifying a Global Variable:
+    This method involves declaring a variable in the global scope and then modifying its value within the function.
+    #!/bin/bash
+
+    # Declare a global variable
+    global_variable=""
+
+    # Define the function
+    another_function() {
+      global_variable="This value was set by the function."
+      }
+
+      # Call the function
+      another_function
+
+      # Use the global variable
+      echo "The global variable contains: $global_variable"
+
+      Note: While using global variables is possible, it is generally less recommended than capturing standard output, as it can lead to less clear code and potential side effects if not managed carefully. Capturing standard output promotes better encapsulation and readability.
+
+      AI responses may include mistakes.
+
+      https://www.google.com/search?q=a+function+that+return+a+variable+in+bash+call+function+and+story+to+variable

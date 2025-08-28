@@ -1,0 +1,14 @@
+st all files in the current HEAD of a Git repository, including those in subdirectories, use the following command:
+git ls-tree --full-tree --name-only -r HEAD
+
+Explanation of the command:
+
+• git ls-tree: This command lists the contents of a tree object in Git.
+• --full-tree: This option makes the command run as if you were in the repository's root directory, ensuring all files are included regardless of your current working directory.
+• --name-only: This option displays only the file names, without additional information like file modes or object SHAs.
+• -r: This option recursively lists the contents of subdirectories.
+• HEAD: This specifies that you want to list the files as they exist in the commit currently pointed to by HEAD, which represents the tip of your current branch.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=git+list+all+files+in+current+head+of+repo&oq=git+list+all+files+in+current+head+of+repo&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRigATIHCAUQIRigATIHCAYQIRiPAtIBCTI5Nzc3ajFqN6gCFLACAfEFa4iU3xtcewzxBWuIlN8bXHsM&client=ms-android-charter-us-rvc3&sourceid=chrome-mobile&ie=UTF-8

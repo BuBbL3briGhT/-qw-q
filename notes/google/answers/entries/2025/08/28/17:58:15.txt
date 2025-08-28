@@ -1,0 +1,32 @@
+To grep against lines stored in a shell variable, you can use either a pipe or a here string to feed the variable's content as standard input to grep.
+1. Using a Pipe:
+This method involves echoing the variable's content and piping it to grep.
+my_variable="line 1 with pattern
+line 2
+line 3 with another pattern"
+
+echo "$my_variable" | grep "pattern"
+
+Explanation:
+
+• echo "$my_variable": This prints the content of my_variable to standard output. Using double quotes around $my_variable is important to preserve line breaks and prevent word splitting.
+• |: The pipe operator redirects the standard output of echo to the standard input of grep.
+• grep "pattern": grep then searches for "pattern" within the input it receives.
+
+2. Using a Here String:
+A here string is a more concise way to feed a variable's content as standard input.
+my_variable="line 1 with pattern
+line 2
+line 3 with another pattern"
+
+grep "pattern" <<< "$my_variable"
+
+Explanation:
+
+• &lt;&lt;&lt; "$my_variable": This is the here string syntax. It feeds the content of my_variable as standard input to the command preceding it (grep). Again, double quotes are crucial for proper handling of the variable's content.
+
+Both methods achieve the same result: allowing grep to search for patterns within the multi-line content of a shell variable. Choose the method that best suits your scripting style and readability preferences.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=grep+against+lines+stored+in+variable
