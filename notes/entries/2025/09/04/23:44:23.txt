@@ -1,0 +1,59 @@
+When performing a deep equality check in JavaScript (e.g., using Mocha with Chai or Node's assert module), you might want to ignore certain keys during the comparison. Since there isn't a built-in way to ignore keys in assert.deepEqual or similar methods, you can achieve this by customizing the objects before comparison.
+Here are three approaches:
+
+1. Filter Out Keys Before Comparison
+Manually remove the keys you want to ignore from the objects before performing the deep equality check.
+const assert = require('assert');
+
+const obj1 = { a: 1, b: 2, c: 3 };
+const obj2 = { a: 1, b: 2, c: 4 };
+
+// Function to omit specific keys
+const omitKeys = (obj, keysToIgnore) => {
+  const filtered = { ...obj };
+  keysToIgnore.forEach(key => delete filtered[key]);
+  return filtered;
+};
+
+assert.deepStrictEqual(
+  omitKeys(obj1, ['c']),
+  omitKeys(obj2, ['c'])
+);
+
+
+2. Use a Custom Comparison Function
+Write a helper function to compare objects while ignoring specific keys.
+const deepEqualIgnoringKeys = (obj1, obj2, keysToIgnore) => {
+  const omitKeys = (obj, keys) => {
+    const filtered = { ...obj };
+    keys.forEach(key => delete filtered[key]);
+    return filtered;
+  };
+
+  return JSON.stringify(omitKeys(obj1, keysToIgnore)) === JSON.stringify(omitKeys(obj2, keysToIgnore));
+};
+
+const obj1 = { a: 1, b: 2, c: 3 };
+const obj2 = { a: 1, b: 2, c: 4 };
+
+console.log(deepEqualIgnoringKeys(obj1, obj2, ['c'])); // true
+
+
+3. Use Chai with chai-subset
+If you're using Chai, the chai-subset plugin allows you to check for partial matches, effectively ignoring keys you don't care about.
+const chai = require('chai');
+const chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
+
+const { expect } = chai;
+
+const obj1 = { a: 1, b: 2, c: 3 };
+const obj2 = { a: 1, b: 2, c: 4 };
+
+// Only compare the keys you care about
+expect(obj1).to.containSubset({ a: 1, b: 2 });
+expect(obj2).to.containSubset({ a: 1, b: 2 });
+
+
+These approaches allow you to ignore specific keys while performing deep equality checks in your tests. Choose the one that best fits your use case!
+https://www.bing.com/search?q=ignore+keys+in+deep+equal+javascript+node+mocha&setmkt=en-US&PC=EMMX01&form=LBT003&scope=web

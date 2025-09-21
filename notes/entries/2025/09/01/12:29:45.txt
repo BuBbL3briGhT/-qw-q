@@ -1,0 +1,44 @@
+To use an SQLite database with a Ruby script, the sqlite3-ruby gem is required.
+1. Installation:
+First, install the sqlite3 gem using Bundler (if using a Gemfile) or directly:
+bundle add sqlite3
+# or
+gem install sqlite3
+
+2. Connecting to/Creating a Database:
+An SQLite database is a single file. To connect to an existing database or create a new one, instantiate SQLite3::Database with the database file's name.
+require "sqlite3"
+
+# Opens 'data.db' or creates it if it doesn't exist
+db = SQLite3::Database.new("data.db")
+
+Alternatively, use ':memory:' to create a temporary in-memory database that will be destroyed when the script ends.
+3. Executing SQL Statements:
+SQL commands are executed using the execute method of the SQLite3::Database object.
+# Create a table
+db.execute <<-SQL
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    email TEXT
+  );
+SQL
+
+# Insert data
+db.execute "INSERT INTO users (name, email) VALUES (?, ?)", "Alice", "alice@example.com"
+
+# Select data
+db.execute("SELECT * FROM users") do |row|
+  p row # Prints each row as an array
+end
+
+Explanation:
+
+• db.execute &lt;&lt;-SQL ... SQL: This is a "heredoc" syntax in Ruby for multi-line strings, useful for longer SQL statements.
+• CREATE TABLE IF NOT EXISTS: This ensures the table is only created if it doesn't already exist, preventing errors on subsequent runs.
+• Parameter markers (?): Using ? and passing an array of values to execute is a secure way to prevent SQL injection when inserting or updating data.
+• db.execute("SELECT ...") do |row| ... end: When selecting data, the execute method can be used with a block to iterate over each returned row. Each row will be an array containing the column values.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=using+sqlite+database+with+ruby+script

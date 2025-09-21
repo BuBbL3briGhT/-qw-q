@@ -1,0 +1,46 @@
+Using SQLite databases with Bash scripts allows for automation and programmatic interaction with your data. The sqlite3 command-line tool is central to this.
+1. Executing Single Commands:
+You can execute a single SQL command directly from the Bash script by passing it as a string to sqlite3.
+#!/bin/bash
+DATABASE="my_database.db"
+sqlite3 "$DATABASE" "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT);"
+sqlite3 "$DATABASE" "INSERT INTO users (name) VALUES ('Alice');"
+sqlite3 "$DATABASE" "SELECT * FROM users;"
+
+2. Executing Multiple Commands (Here-Document):
+For multiple SQL commands, using a "here-document" (EOF) is efficient. This allows you to write multiline SQL directly within the script.
+#!/bin/bash
+DATABASE="my_database.db"
+sqlite3 "$DATABASE" <<EOF
+CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY, item TEXT, price REAL);
+INSERT INTO products (item, price) VALUES ('Laptop', 1200.00);
+INSERT INTO products (item, price) VALUES ('Mouse', 25.50);
+SELECT * FROM products;
+EOF
+
+3. Handling Output and Variables:
+You can capture the output of sqlite3 commands into Bash variables or pipe them to other commands for processing.
+#!/bin/bash
+DATABASE="my_database.db"
+USER_NAME="Bob"
+
+# Insert data using a variable
+sqlite3 "$DATABASE" "INSERT INTO users (name) VALUES ('$USER_NAME');"
+
+# Query and store result in a variable
+USER_COUNT=$(sqlite3 "$DATABASE" "SELECT COUNT(*) FROM users;")
+echo "Total users: $USER_COUNT"
+
+# Query and format output
+sqlite3 -csv "$DATABASE" "SELECT * FROM users;"
+
+Important Considerations:
+
+• Quoting: Be mindful of quoting when embedding variables or complex SQL within Bash, as incorrect quoting can lead to errors.
+• Error Handling: Implement error handling in your scripts to gracefully manage situations where SQLite commands fail.
+• Security: If dealing with user input, sanitize it to prevent SQL injection vulnerabilities.
+• Alternatives: For more complex database interactions or larger-scale applications, consider using programming languages with dedicated SQLite libraries (e.g., Python with sqlite3 module) for better control and features.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=using+sqlite+database+with+bash+script&oq=using+sqlite+database+with+bash+script

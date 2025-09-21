@@ -1,0 +1,85 @@
+d a CSV file into a Bash associative array, where the first row contains the keys and subsequent rows contain the values, you can use a combination of IFS, read, and declare -A.
+Here's a method to achieve this, reading each data row into its own associative array, and then storing the names of these arrays in an indexed array:
+#!/bin/bash
+
+# Declare an indexed array to hold the names of the associative arrays
+declare -a data_rows
+
+# Declare an associative array for headers
+declare -A headers
+
+# Input CSV file
+csv_file="data.csv"
+
+# Read the header row
+IFS=, read -r -a header_array < "$csv_file"
+
+# Populate the 'headers' associative array for easy lookup (optional, but useful)
+for i in "${!header_array[@]}"; do
+    headers["${header_array[$i]}"]="$i"
+done
+
+# Read the data rows
+row_num=1
+tail -n +2 "$csv_file" | while IFS=, read -r -a values_array; do
+    # Declare an associative array for the current row
+    declare -A "row_${row_num}"
+
+    # Populate the row's associative array using header names as keys
+    for i in "${!values_array[@]}"; do
+        key="${header_array[$i]}"
+        value="${values_array[$i]}"
+        declare -n current_row="row_${row_num}" # Create nameref
+        current_row["$key"]="$value"
+    done
+
+    # Add the name of the current row's associative array to the data_rows array
+    data_rows+=("row_${row_num}")
+    ((row_num++))
+done
+
+# Example usage:
+echo "Accessing data from row 1:"
+declare -n row1_data="row_1"
+echo "ID: ${row1_data[id]}"
+echo "Name: ${row1_data[name]}"
+
+echo -e "\nIterating through all rows:"
+for row_name in "${data_rows[@]}"; do
+    declare -n current_row_data="$row_name"
+    echo "--- ${row_name} ---"
+    for key in "${!current_row_data[@]}"; do
+        echo "$key: ${current_row_data[$key]}"
+    done
+done
+
+Explanation:
+
+• declare -a data_rows: Initializes an indexed array to store the names of the associative arrays created for each row.
+• declare -A headers: Initializes an associative array to map header names to their column index (optional but can be helpful).
+• IFS=, read -r -a header_array &lt; "$csv_file": Reads the first line of the CSV into an indexed array header_array, using a comma as the field separator. -r prevents backslash escapes from being interpreted.
+• tail -n +2 "$csv_file" | while IFS=, read -r -a values_array; do ... done:
+	• tail -n +2 "$csv_file": Skips the header line and pipes the remaining data to the while loop.
+	• The while loop reads each subsequent line into the values_array.
+
+• declare -A "row_${row_num}": Declares a new associative array for each row, dynamically named (e.g., row_1, row_2).
+• declare -n current_row="row_${row_num}": Creates a nameref current_row that points to the dynamically named associative array for the current row. This allows easier access and assignment.
+• current_row["$key"]="$value": Populates the current row's associative array using the header names as keys and the corresponding values from values_array.
+• data_rows+=("row_${row_num}"): Adds the name of the newly created associative array to the data_rows indexed array, allowing you to iterate through all data rows later.
+
+To use this script:
+
+• Save the code as a .sh file (e.g., read_csv.sh).
+• Create a data.csv file in the same directory with your CSV data, for example:
+
+    id,name,city
+    1,Alice,New York
+    2,Bob,London
+    3,Charlie,Paris
+
+• Make the script executable: chmod +x read_csv.sh.
+• Run the script: ./read_csv.sh.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=bash+read+csn+into+associative+array
